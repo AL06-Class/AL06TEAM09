@@ -19,9 +19,8 @@
 
 역할 값은 아래를 기본으로 합니다.
 
-- `candidate`: 지원자
-- `recruiter`: 채용담당자
-- `interviewer`: 면접관
+- `center`: 센터(센터장)
+- `caregiver`: 요양보호사
 
 역할 이름을 바꾸거나 새 역할을 추가하려면 먼저 팀 논의가 필요합니다.
 
@@ -74,32 +73,24 @@
 ### 컬렉션 이름
 
 - `users`: 유저
-- `companies`: 기업
-- `jobPostings`: 채용공고
-- `candidateProfiles`: 지원자 프로필
-- `applications`: 지원서
-- `scheduleConversations`: 일정 조율 챗봇 대화
-- `availabilitySlots`: 면접 가능 시간
-- `scheduleSuggestions`: 추천 면접 시간
-- `interviews`: 확정 또는 진행 중인 면접
-- `interviewQuestionSets`: 면접 질문 세트
-- `interviewQuestions`: 면접 질문
-- `evaluations`: 면접 평가
-- `evaluationCriteria`: 평가 기준
+- `centers`: 방문요양센터
+- `caregivers`: 요양보호사
+- `careRecipients`: 수급자
+- `riskHouseholdCards`: 위험가구카드
+- `riskRecords`: 민원·고충·취소 기록
+- `turnoverRiskReports`: 이탈위험 리포트
+- `substituteWorkRequests`: 대체근무 요청
 
 ### 공통 필드 이름
 
 - `id`: 문서 또는 항목 식별자
 - `userId`: 유저 식별자
-- `candidateId`: 지원자 식별자
-- `recruiterId`: 채용담당자 식별자
-- `interviewerId`: 면접관 식별자
-- `companyId`: 기업 식별자
-- `jobPostingId`: 채용공고 식별자
-- `applicationId`: 지원서 식별자
-- `interviewId`: 면접 식별자
-- `conversationId`: 일정 조율 대화 식별자
-- `questionSetId`: 질문 세트 식별자
+- `centerId`: 센터 식별자
+- `caregiverId`: 요양보호사 식별자
+- `careRecipientId`: 수급자 식별자
+- `riskHouseholdCardId`: 위험가구카드 식별자
+- `riskRecordId`: 민원·고충·취소 기록 식별자
+- `substituteWorkRequestId`: 대체근무 요청 식별자
 - `status`: 상태값
 - `title`: 제목
 - `description`: 설명
@@ -112,31 +103,30 @@
 
 ### 과업별 공통 필드 이름
 
-#### 일정 조율 자동화
+#### 위험가구카드
 
-- `availableStartAt`: 가능한 시작 시각
-- `availableEndAt`: 가능한 종료 시각
-- `preferredStartAt`: 선호 시작 시각
-- `preferredEndAt`: 선호 종료 시각
-- `suggestedStartAt`: 추천 시작 시각
-- `suggestedEndAt`: 추천 종료 시각
-- `confirmedStartAt`: 확정 시작 시각
-- `confirmedEndAt`: 확정 종료 시각
-- `recommendationReason`: 추천 이유
-- `priorityScore`: 추천 우선순위 점수
-- `message`: 챗봇 대화 메시지
-- `senderRole`: 메시지 작성자 역할
+- `riskLevel`: 위험등급
+- `recordType`: 기록 유형
+- `recordedAt`: 기록 시각
+- `recordedBy`: 기록 작성자
+- `complaintCount`: 민원 횟수
+- `cancellationCount`: 취소 횟수
 
-#### 면접 질문 및 평가
+#### 이탈위험 리포트
 
-- `resumeSummary`: 이력서 요약
-- `portfolioSummary`: 포트폴리오 요약
-- `questionText`: 질문 내용
-- `questionType`: 질문 유형
-- `questionIntent`: 질문 의도
-- `evaluationItem`: 평가 항목
-- `score`: 점수
-- `comment`: 평가 의견
+- `reportMonth`: 리포트 기준 월
+- `careTemperature`: 케어온도
+- `turnoverRiskScore`: 이탈위험 점수
+- `riskReason`: 위험 판단 이유
+- `previousMonthDelta`: 전월 대비 변화
+
+#### 대체근무 요청
+
+- `workDate`: 근무 날짜
+- `workStartAt`: 근무 시작 시각
+- `workEndAt`: 근무 종료 시각
+- `requestMessage`: 요청 메시지
+- `responseStatus`: 응답 상태
 
 #### UX/UI 개선
 
@@ -145,9 +135,8 @@
 
 ### 역할 값
 
-- `candidate`: 지원자
-- `recruiter`: 채용담당자
-- `interviewer`: 면접관
+- `center`: 센터(센터장)
+- `caregiver`: 요양보호사
 
 ### 상태값 초안
 
@@ -176,123 +165,92 @@
 - `createdAt`
 - `updatedAt`
 
-### candidateProfiles
+### centers
 
 - `id`
-- `userId`
-- `email`
+- `name`
 - `phone`
-- `position`
-- `resumeSummary`
-- `portfolioSummary`
-- `availableTimes`
+- `address`
 - `createdAt`
 - `updatedAt`
 
-### applications
+### caregivers
 
 - `id`
-- `candidateId`
-- `jobPostingId`
-- `status`
-- `interviewerId`
-- `createdAt`
-- `updatedAt`
-
-### scheduleConversations
-
-- `id`
-- `applicationId`
-- `candidateId`
-- `recruiterId`
-- `status`
-- `message`
-- `senderRole`
-- `createdAt`
-- `updatedAt`
-
-### availabilitySlots
-
-- `id`
-- `userId`
-- `applicationId`
-- `availableStartAt`
-- `availableEndAt`
+- `centerId`
+- `name`
+- `phone`
+- `careTemperature`
 - `status`
 - `createdAt`
 - `updatedAt`
 
-### scheduleSuggestions
+### careRecipients
 
 - `id`
-- `applicationId`
-- `suggestedStartAt`
-- `suggestedEndAt`
-- `recommendationReason`
-- `priorityScore`
+- `centerId`
+- `name`
+- `address`
+- `riskLevel`
+- `createdAt`
+- `updatedAt`
+
+### riskHouseholdCards
+
+- `id`
+- `centerId`
+- `careRecipientId`
+- `caregiverId`
+- `riskLevel`
 - `status`
 - `createdAt`
 - `updatedAt`
 
-### interviews
+### riskRecords
 
 - `id`
-- `applicationId`
-- `candidateId`
-- `interviewerId`
-- `confirmedStartAt`
-- `confirmedEndAt`
-- `status`
-- `createdAt`
-- `updatedAt`
-
-### interviewQuestionSets
-
-- `id`
-- `applicationId`
-- `interviewId`
-- `questions`
-- `source`
-- `status`
-- `createdAt`
-- `updatedAt`
-
-### interviewQuestions
-
-- `id`
-- `questionSetId`
-- `questionText`
-- `questionType`
-- `questionIntent`
-- `source`
-- `createdAt`
-- `updatedAt`
-
-### evaluationCriteria
-
-- `id`
-- `jobPostingId`
-- `evaluationItem`
+- `centerId`
+- `careRecipientId`
+- `caregiverId`
+- `recordType`
 - `description`
+- `recordedAt`
+- `recordedBy`
 - `createdAt`
 - `updatedAt`
 
-### evaluations
+### turnoverRiskReports
 
 - `id`
-- `applicationId`
-- `interviewId`
-- `interviewerId`
-- `score`
+- `centerId`
+- `reportMonth`
+- `caregiverId`
+- `careTemperature`
+- `turnoverRiskScore`
+- `riskReason`
+- `previousMonthDelta`
+- `createdAt`
+- `updatedAt`
+
+### substituteWorkRequests
+
+- `id`
+- `centerId`
+- `careRecipientId`
+- `caregiverId`
+- `workDate`
+- `workStartAt`
+- `workEndAt`
 - `status`
-- `comment`
+- `requestMessage`
+- `responseStatus`
 - `createdAt`
 - `updatedAt`
 
 ## 최종 결정
 
-- 주요 컬렉션: 공통 이름 사전의 컬렉션 이름을 초안으로 사용
-- 역할 기준: `candidate`, `recruiter`, `interviewer`
+- 주요 컬렉션: `users`, `centers`, `caregivers`, `careRecipients`, `riskHouseholdCards`, `riskRecords`, `turnoverRiskReports`, `substituteWorkRequests`
+- 역할 기준: MVP에서는 `center`, `caregiver` 두 가지만 사용
 - 필드명 규칙: 영어 `camelCase`
 - 날짜 저장 방식: 문자열 또는 Firebase Timestamp 중 하나로 통일
 - 상태값 기준: 자유 텍스트가 아니라 정해진 값만 사용
@@ -302,6 +260,8 @@
 
 ## 변경 이력
 
+- 2026-06-30: 최신 제품기획 워크시트 기준으로 케어온도 필드와 보호사관리 흐름 반영
+- 2026-06-30: MVP 역할을 센터(센터장)와 요양보호사 2개로 단순화
 - 2026-05-29: SPA와 역할 기반 데이터 기준 반영
 - 2026-05-29: 기본 데이터 기준을 최종 결정에 반영
 - 2026-05-29: 공통 이름 사전과 데이터 이름 추가 절차 반영
